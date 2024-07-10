@@ -137,7 +137,8 @@ run = [
 [tool.hatch.envs.type]
 template = "type"
 description = "Run the type checker"
-python = "3.12"
+# https://github.com/pypa/hatch/issues/1606
+# python = "3.12"
 dev-mode = false
 features = [
   "type",
@@ -151,7 +152,8 @@ scripts = { run = [
 [tool.hatch.envs.fix]
 template = "fix"
 description = "Run the pre-commit tool to lint and autofix issues"
-python = "3.12"
+# https://github.com/pypa/hatch/issues/1606
+# python = "3.12"
 detached = true
 dependencies = [
   "pre-commit>=3.6",
@@ -163,13 +165,15 @@ scripts = { "run" = [
 [tool.hatch.envs.docs]
 template = "docs"
 description = "Build documentation using Sphinx"
-python = "3.12"
+# https://github.com/pypa/hatch/issues/1606
+# python = "3.15"
 dev-mode = false
 features = [
   "docs",
 ]
 [tool.hatch.envs.docs.scripts]
 build = [
+  """python --version""", # show python version
   """python -c "import glob; import subprocess; subprocess.call(['proselint'] + glob.glob('docs/*.rst'))" """,
   """python -c "from shutil import rmtree; rmtree('docs/build', ignore_errors=True)" """,
   "sphinx-build -d docs/build/tree docs docs/build --color -b html",
@@ -179,7 +183,8 @@ build = [
 [tool.hatch.envs.readme]
 template = "readme"
 description = "check that the long description is valid"
-python = "3.12"
+# https://github.com/pypa/hatch/issues/1606
+# python = "3.12"
 dependencies = [
   "build[virtualenv]>=1.0.3",
   "twine>=4.0.2",
